@@ -1,0 +1,64 @@
+group 'com.github.kirikakis.marver.characters'
+
+apply plugin:'java'
+apply plugin:'base'
+apply plugin:'application'
+apply plugin: 'groovy'
+apply plugin: 'idea'
+
+def versions = [
+        jdk     : '1.8'
+]
+
+sourceCompatibility = versions.jdk
+
+mainClassName = "com.github.kirikakis.marvel.character.Main"
+applicationName = "marvel-character"
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-web:1.5.8.RELEASE"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa:1.5.8.RELEASE"
+    compile "org.springframework.boot:spring-boot-starter-data-rest:1.5.8.RELEASE"
+    compile "io.springfox:springfox-swagger2:2.7.0"
+    compile "io.springfox:springfox-swagger-ui:2.7.0"
+    compile "org.codehaus.groovy:groovy-all:2.4.10"
+    compile "com.h2database:h2:1.4.196"
+
+    testCompile "org.codehaus.groovy:groovy-all:2.4.10"
+    testCompile "org.spockframework:spock-core:1.1-groovy-2.4"
+
+    // optional dependencies for using Spock
+    testCompile "org.hamcrest:hamcrest-core:1.3" // only necessary if Hamcrest matchers are used
+    testRuntime "net.bytebuddy:byte-buddy:1.6.5" // allows mocking of classes (in addition to interfaces)
+    testRuntime "org.objenesis:objenesis:2.5.1"  // allows mocking of classes without default constructor (together with CGLIB)
+}
+
+startScripts {
+
+    // Add config, libs folders to classpath. Using workaround at
+    // https://discuss.gradle.org/t/classpath-in-application-plugin-is-building-always-relative-to-app-hoe-lib-directory/2012
+    classpath += files('config')
+    doLast {
+        def windowsScriptFile = file getWindowsScript()
+        def unixScriptFile = file getUnixScript()
+        windowsScriptFile.text = windowsScriptFile.text.replace('%APP_HOME%\\lib\\config', '%APP_HOME%\\config')
+        unixScriptFile.text = unixScriptFile.text.replace('$APP_HOME/lib/config', '$APP_HOME/config')
+    }
+}
+
+distZip {
+    into(project.name + '/config') {
+        from 'src/main/resources'
+    }
+}
+
+distTar {
+    into(project.name + '/config') {
+        from 'src/main/resources'
+    }
+}
