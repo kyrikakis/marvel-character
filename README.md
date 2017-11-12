@@ -38,7 +38,7 @@ For building the source code, running the tests and launching the application, p
 
 #### Windows
 ```
-gradlew.bat test run -Dmarvel.publicApiKey="{your_public_key}" -Dmarvel.privateApiKey="{your_private_key}" -Dtranslate.apiKey="{your_google_translate_api_key}"
+gradlew test run -Dmarvel.publicApiKey="{your_public_key}" -Dmarvel.privateApiKey="{your_private_key}" -Dtranslate.apiKey="{your_google_translate_api_key}"
 ```
 
 ## Using API
@@ -100,7 +100,7 @@ In order to deploy the application navigate in the root folder of the project fr
 `./gradlew build`
 
 #### Windows
-`gradlew.bat build`
+`gradlew build`
 
 Then copy **build/distributions/marvel-character.zip** and unzip in a folder on the target machine, navigate to the unziped folder and execute:
 
