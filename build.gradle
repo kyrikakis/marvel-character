@@ -1,4 +1,4 @@
-group 'com.github.kirikakis.marver.characters'
+group 'com.github.kirikakis.marvel.characters'
 
 apply plugin:'java'
 apply plugin:'base'
@@ -28,6 +28,8 @@ dependencies {
     compile "io.springfox:springfox-swagger-ui:2.7.0"
     compile "org.codehaus.groovy:groovy-all:2.4.10"
     compile "com.h2database:h2:1.4.196"
+    compile "org.jsoup:jsoup:1.10.2"
+    compile 'com.google.cloud:google-cloud-translate:1.10.0'
 
     testCompile "org.codehaus.groovy:groovy-all:2.4.10"
     testCompile "org.spockframework:spock-core:1.1-groovy-2.4"

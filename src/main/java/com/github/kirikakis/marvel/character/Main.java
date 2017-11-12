@@ -1,7 +1,5 @@
 package com.github.kirikakis.marvel.character;
 
-import com.github.kirikakis.marvel.character.bootstrap.MarvelCharacterBootstrap;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication

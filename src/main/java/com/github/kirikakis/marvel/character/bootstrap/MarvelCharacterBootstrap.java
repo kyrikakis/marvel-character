@@ -20,12 +20,17 @@ import java.util.List;
 public class MarvelCharacterBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private MarvelConfig marvelConfig;
-
     private MarvelCharacterRepository marvelCharacterRepository;
+    private RestTemplate restTemplate;
 
     @Autowired
     public void setMarvelCharacterRepository(MarvelCharacterRepository marvelCharacterRepository) {
         this.marvelCharacterRepository = marvelCharacterRepository;
+    }
+
+    @Autowired
+    public void setRestTemplate(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
     }
 
     @Autowired
@@ -36,16 +41,17 @@ public class MarvelCharacterBootstrap implements ApplicationListener<ContextRefr
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         try {
-            loadAllCharactersFromMarvelToMemory(new RestTemplate());
+            loadAllCharactersFromMarvelToMemory();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    void loadAllCharactersFromMarvelToMemory(RestTemplate restTemplate) throws IOException {
+    void loadAllCharactersFromMarvelToMemory() throws IOException {
         int count = 0;
         int total = 0;
         do {
+            marvelConfig.setTimestamp(System.currentTimeMillis());
             String result = restTemplate.getForObject(marvelConfig.getCharactersUrl(count), String.class);
             System.out.println(result);
             ObjectMapper objectMapper = new ObjectMapper();

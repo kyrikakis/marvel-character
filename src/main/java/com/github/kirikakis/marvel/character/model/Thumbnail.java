@@ -4,11 +4,14 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
 
+import io.swagger.annotations.ApiModel;
+
 @Embeddable
 @Access(AccessType.PROPERTY)
+@ApiModel(value="Thumbnail", description="The representative image for this character.")
 public class Thumbnail {
-    String path;
-    String extension;
+    private String path;
+    private String extension;
 
     public String getPath() {
         return path;

@@ -1,6 +1,10 @@
 package com.github.kirikakis.marvel.character.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -12,23 +16,26 @@ import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
-@ApiModel(value="MarvelCharacter", description="Marvel character model")
+@ApiModel(value="MarvelCharacter", description="The Marvel character model.")
 public class MarvelCharacter {
 
     @Id
-    @ApiModelProperty(notes = "The Marvel character ID")
+    @ApiModelProperty(notes = "The Marvel character unique identifier.")
     private Integer id;
 
-    @ApiModelProperty(notes = "The Marvel character Name")
+    @ApiModelProperty(notes = "The Marvel character Name.")
     private String name;
 
-    @ApiModelProperty(notes = "The Marvel character Description")
+    @ApiModelProperty(notes = "The Marvel character Description.")
     @Column( length = 100000 )
     private String description;
 
-    @ApiModelProperty(notes = "The Marvel character Thumbnail")
+    @ApiModelProperty(notes = "The Marvel character Thumbnail.")
     @Embedded
     private Thumbnail thumbnail;
+
+    @ApiModelProperty(hidden = true)
+    private String wikiUrl;
 
     public MarvelCharacter() {}
 
@@ -66,5 +73,24 @@ public class MarvelCharacter {
 
     public void setThumbnail(Thumbnail thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    @JsonIgnore
+    public String getWikiUrl() {
+        return wikiUrl;
+    }
+
+    @JsonIgnore
+    public void setWikiUrl(String wikiUrl) {
+        this.wikiUrl = wikiUrl;
+    }
+
+    @JsonProperty("urls")
+    public void setWikiUrlFromList(List<MarvelCharacterUrl> urls) {
+        for(MarvelCharacterUrl url : urls) {
+            if(url.getType().equals("wiki")) {
+                this.wikiUrl = url.getUrl();
+            }
+        }
     }
 }

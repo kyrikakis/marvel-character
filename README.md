@@ -11,6 +11,8 @@
 * [Using API](#using-api)
     * [GET Characters](#get-characters)
     * [GET Character by Id](#get-character-by-id)
+    * [GET Character Powers by Id](#get-character-powers-by-id)
+    * [Using Swagger WebUI](#using-swagger-webui)
 * [Deployment](#deployment)
     * [Prerequisites on a Live Environment](#prerequisites-on-a-live-environment)
 * [Configuring Application](#configuring-application)
@@ -18,7 +20,7 @@
     * [NOTES](#notes)
 
 ## Overview
-Getting your favorite character from MARVEL. Retrieves the whole list of characters during bootstrap using the Marvel [developer API](https://developer.marvel.com/docs) and saves it into an [H2 Database Engine](http://www.h2database.com/html/main.html) instance for later use.
+Getting your favorite character from MARVEL. Retrieves the whole list of characters during bootstrap using the Marvel [developer API](https://developer.marvel.com/docs) and saves it into a [H2 Database Engine](http://www.h2database.com/html/main.html) instance for later use.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -27,24 +29,34 @@ These instructions will get you a copy of the project up and running on your loc
 * Java 1.8 JDK (for installation instructions see [here](https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html))
 
 ### Execution
-For building the source code, running the tests and launching the application, please navigate in the root folder of the project from your console and execute the following command providing your Marvel API keys and wait for the application to load all the characters from Marvel:
+For building the source code, running the tests and launching the application, please navigate in the root folder of the project from your console and execute the following command providing your API keys and wait for a couple of minutes for the application to load all the characters from Marvel (can be further enhanced using Concurrency)
 
 #### Unix
-`./gradlew test run -Dmarvel.publicApiKey="{your_public_key}" -Dmarvel.privateApiKey="{your_private_key}"`
+```
+./gradlew test run -Dmarvel.publicApiKey="{your_public_key}" -Dmarvel.privateApiKey="{your_private_key}" -Dtranslate.apiKey="{your_google_translate_api_key}"
+```
 
 #### Windows
-`gradle.bat test run -Dmarvel.publicApiKey="{your_public_key}" -Dmarvel.privateApiKey="{your_private_key}"`
+```
+gradle.bat test run -Dmarvel.publicApiKey="{your_public_key}" -Dmarvel.privateApiKey="{your_private_key}" -Dtranslate.apiKey="{your_google_translate_api_key}"
+```
 
 ## Using API
 
 ### GET Characters
-`curl -X GET --header 'Accept: application/json' 'http://localhost:8080/characters'`
+```
+curl -X GET --header 'Accept: application/json' 'http://localhost:8080/characters'
+```
 
 #### result:
-`[ 1011334, 1017100, 1009144 ]`
+```
+[ 1011334, 1017100, 1009144 ]
+```
 
 ### GET Character by Id
-`curl -X GET --header 'Accept: application/json' 'http://localhost:8080/characters/{Id}'`
+```
+curl -X GET --header 'Accept: application/json' 'http://localhost:8080/characters/{Id}'
+```
 
 #### result:
 ```
@@ -59,6 +71,28 @@ For building the source code, running the tests and launching the application, p
 }
 ```
 
+### GET Character Powers by Id
+```
+curl -X GET --header 'Accept: application/json' 'http://localhost:8080/characters/{Id}/powers'
+```
+
+### GET Character Powers by Id Translated
+```
+curl -X GET --header 'Accept: application/json' 'http://localhost:8080/characters/{Id}/powers?language={languageCode}'
+```
+
+#### result:
+```
+{
+  "powers": "Awesome coding powers"
+}
+```
+
+### Using Swagger WebUI
+http://localhost:8080/swagger-ui.html
+
+<img src="swagger.png"/>
+
 ## Deployment
 In order to deploy the application navigate in the root folder of the project from your console and execute the following command.
 
@@ -71,10 +105,14 @@ In order to deploy the application navigate in the root folder of the project fr
 Then copy **build/distributions/marvel-character.zip** and unzip in a folder on the target machine, navigate to the unziped folder and execute:
 
 #### Unix
-`./bin/marvel-character --marvel.publicApiKey="{your_public_key}" --marvel.privateApiKey="{your_private_key}"`
+```
+./bin/marvel-character --marvel.publicApiKey="{your_public_key}" --marvel.privateApiKey="{your_private_key}" --translate.apiKey="{your_google_translate_api_key}"
+```
 
 #### Windows
-`bin/marvel-character.bat --marvel.publicApiKey="{your_public_key}" --marvel.privateApiKey="{your_private_key}"`
+```
+bin/marvel-character.bat --marvel.publicApiKey="{your_public_key}" --marvel.privateApiKey="{your_private_key}" --translate.apiKey="{your_google_translate_api_key}"
+```
 
 ### Prerequisites on a Live Environment
 * Java 1.8 JRE (for installation instructions see [here](https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html))

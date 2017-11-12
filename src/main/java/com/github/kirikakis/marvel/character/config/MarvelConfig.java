@@ -1,12 +1,21 @@
 package com.github.kirikakis.marvel.character.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Component
+@Configuration
 public class MarvelConfig {
+
+    @Bean
+    public RestTemplate getRestTemplate() {
+        return new RestTemplate();
+    }
 
     @Value("${marvel.charactersUrl}")
     private String charactersUrl;
@@ -22,16 +31,40 @@ public class MarvelConfig {
 
     Long timestamp;
 
-    String getPublicApiKey() {
+    public void setCharactersUrl(String charactersUrl) {
+        this.charactersUrl = charactersUrl;
+    }
+
+    public String getPublicApiKey() {
         return publicApiKey;
     }
 
-    String getPrivateApiKey() {
+    public void setPublicApiKey(String publicApiKey) {
+        this.publicApiKey = publicApiKey;
+    }
+
+    public String getPrivateApiKey() {
         return privateApiKey;
     }
 
-    private Long getTimestamp() {
-        return timestamp = System.currentTimeMillis();
+    public void setPrivateApiKey(String privateApiKey) {
+        this.privateApiKey = privateApiKey;
+    }
+
+    public Integer getCharactersLimit() {
+        return charactersLimit;
+    }
+
+    public void setCharactersLimit(Integer charactersLimit) {
+        this.charactersLimit = charactersLimit;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 
     private String getHash() {
