@@ -1,4 +1,4 @@
-group 'com.github.kirikakis.marvel.characters'
+group 'com.github.kirikakis.marvel.character'
 
 apply plugin:'java'
 apply plugin:'base'
