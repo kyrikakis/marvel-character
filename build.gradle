@@ -31,15 +31,16 @@ dependencies {
 
     testCompile "org.codehaus.groovy:groovy-all:2.4.10"
     testCompile "org.spockframework:spock-core:1.1-groovy-2.4"
+    testCompile "org.springframework.boot:spring-boot-starter-test:1.5.8.RELEASE"
+}
 
-    // optional dependencies for using Spock
-    testCompile "org.hamcrest:hamcrest-core:1.3" // only necessary if Hamcrest matchers are used
-    testRuntime "net.bytebuddy:byte-buddy:1.6.5" // allows mocking of classes (in addition to interfaces)
-    testRuntime "org.objenesis:objenesis:2.5.1"  // allows mocking of classes without default constructor (together with CGLIB)
+tasks.withType(JavaExec) {
+    // Assign all Java system properties from
+    // the command line to the JavaExec task.
+    systemProperties System.properties
 }
 
 startScripts {
-
     // Add config, libs folders to classpath. Using workaround at
     // https://discuss.gradle.org/t/classpath-in-application-plugin-is-building-always-relative-to-app-hoe-lib-directory/2012
     classpath += files('config')

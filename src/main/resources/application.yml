@@ -1,0 +1,7 @@
+### This is the main configuration for marvel-character
+server:
+  port: 8080
+
+marvel:
+  charactersUrl: "http://gateway.marvel.com/v1/public/characters"
+  charactersLimit: 100

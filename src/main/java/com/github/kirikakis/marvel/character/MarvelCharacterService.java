@@ -15,7 +15,11 @@ public class MarvelCharacterService {
         this.marvelCharacterRepository = marvelCharacterRepository;
     }
 
-    public Iterable<MarvelCharacter> listAllCharacters() {
-        return marvelCharacterRepository.findAll();
+    public Iterable<Integer> getAllIds() {
+        return marvelCharacterRepository.getAllIds();
+    }
+
+    public MarvelCharacter getCharacterById(Integer id) {
+        return marvelCharacterRepository.findOne(id);
     }
 }

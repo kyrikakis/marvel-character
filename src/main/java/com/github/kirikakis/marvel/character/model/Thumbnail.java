@@ -6,7 +6,23 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 @Access(AccessType.PROPERTY)
-class Thumbnail {
+public class Thumbnail {
     String path;
     String extension;
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getExtension() {
+        return extension;
+    }
+
+    public void setExtension(String extension) {
+        this.extension = extension;
+    }
 }

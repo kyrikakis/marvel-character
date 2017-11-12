@@ -18,12 +18,24 @@ class MarvelCharacterServiceTest extends Specification {
         characterService.setMarvelCharacterRepository(characterRepository)
     }
 
-    def "ShouldReturnAllMarvelCharacters"() {
+    def "shouldReturnAllMarvelCharacterIds"() {
         given:
-        List<MarvelCharacter> marvelCharacterList = new ArrayList<>()
+        List<Integer> marvelCharacterListIds = new ArrayList<>()
         when:
-        characterService.listAllCharacters() == marvelCharacterList
+
+        def returnedIds = characterService.allIds
         then:
-        1 * characterRepository.findAll() >> marvelCharacterList
+        1 * characterRepository.getAllIds() >> marvelCharacterListIds
+        marvelCharacterListIds == returnedIds
+    }
+
+    def "shouldReturnMarvelCharacterById"() {
+        given:
+        MarvelCharacter marvelCharacter = new MarvelCharacter(1);
+        when:
+        def returnedCharacter = characterService.getCharacterById(1)
+        then:
+        1 * characterRepository.findOne(1) >> marvelCharacter
+        marvelCharacter == returnedCharacter
     }
 }
