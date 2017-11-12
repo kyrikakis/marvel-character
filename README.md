@@ -1,6 +1,23 @@
 <img src="https://i.annihil.us/u/prod/misc/marvel.svg" width=200/>
 
 # marvel-character
+
+#### Table of Contents
+
+* [Overview](#overview)
+* [Getting Started](#getting-started)
+    * [Prerequisites](#prerequisites)
+    * [Execution](#execution)
+* [Using API](#using-api)
+    * [GET Characters](#get-characters)
+    * [GET Character by Id](#get-character-by-id)
+* [Deployment](#deployment)
+    * [Prerequisites on a Live Environment](#prerequisites-on-a-live-environment)
+* [Configuring Application](#configuring-application)
+    * [Configuration File](#configuration-file)
+    * [NOTES](#notes)
+
+## Overview
 Getting your favorite character from MARVEL. Retrieves the whole list of characters during bootstrap using the Marvel [developer API](https://developer.marvel.com/docs) and saves it into an [H2 Database Engine](http://www.h2database.com/html/main.html) instance for later use.
 
 ## Getting Started
@@ -65,7 +82,7 @@ Then copy **build/distributions/marvel-character.zip** and unzip in a folder on 
 ## Configuring Application
 Configuring the application is possible through the application.yml file, you can change the tomcat listening port and the Marvel API parameters:
 ```
-### This is the main configuration for marvel-character
+### Configuration File
 server:
   port: 8080
 
@@ -74,6 +91,6 @@ marvel:
   charactersLimit: 100
 ```
 
-**NOTES**
+#### NOTES
 * On the Development environment the file is under **src/main/resources/application.yml**
 * On the Live environment the file is in the root path of the unzipped folder under **config/application.yml**
