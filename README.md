@@ -2,7 +2,7 @@
 
 # marvel-character
 
-#### Table of Contents
+### Table of Contents
 
 * [Overview](#overview)
 * [Getting Started](#getting-started)
