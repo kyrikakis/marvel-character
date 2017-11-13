@@ -18,18 +18,24 @@
 * [Configuring Application](#configuring-application)
     * [Configuration File](#configuration-file)
     * [NOTES](#notes)
+* [Build With](#build-with)
+* [License](#build-with)
+* [Acknowledgments](#acknowledgments)
 
 ## Overview
-Getting your favorite character from MARVEL. Retrieves the whole list of characters during bootstrap using the Marvel [developer API](https://developer.marvel.com/docs) and saves it into a [H2 Database Engine](http://www.h2database.com/html/main.html) instance for later use.
+Getting your favorite character from Marvel. Retrieves the whole list of characters during bootstrap using the Marvel [developer API](https://developer.marvel.com/docs) and saves it into a [H2 Database Engine](http://www.h2database.com/html/main.html) instance for later use. Provides an API for retrieving a character powers from Marvel wiki and using the [Google Cloud Translation API](https://cloud.google.com/translate/docs/) services, translates them to the desired language.
 
 ## Getting Started
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 * Java 1.8 JDK (for installation instructions see [here](https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html))
 
 ### Execution
-For building the source code, running the tests and launching the application, please navigate in the root folder of the project from your console and execute the following command providing your API keys and wait for a couple of minutes for the application to load all the characters from Marvel (can be further enhanced using Concurrency)
+For building the source code, running the tests and launching the application, please navigate in the root folder of the project
+from your console and execute the following command providing your API keys and wait for a couple of minutes for the application
+to load all the characters from Marvel (can be further enhanced using Concurrency)
 
 #### Unix
 ```
@@ -77,6 +83,7 @@ curl -X GET --header 'Accept: application/json' 'http://localhost:8080/character
 ```
 
 ### GET Character Powers by Id Translated
+
 ```
 curl -X GET --header 'Accept: application/json' 'http://localhost:8080/characters/{Id}/powers?language={languageCode}'
 ```
@@ -132,3 +139,15 @@ marvel:
 #### NOTES
 * On the Development environment the file is under **src/main/resources/application.yml**
 * On the Live environment the file is in the root path of the unzipped folder under **config/application.yml**
+
+## Build With
+* [Spring Boot](https://projects.spring.io/spring-boot/)
+* [Swagger](https://swagger.io/)
+* [SpringFox](http://springfox.github.io/springfox/)
+* [Jsoup](https://jsoup.org/)
+
+## License
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+* [baeldung](http://www.baeldung.com/swagger-2-documentation-for-spring-rest-api)

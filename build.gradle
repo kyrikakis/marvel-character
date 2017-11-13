@@ -3,17 +3,25 @@ group 'com.github.kirikakis.marvel.character'
 apply plugin:'java'
 apply plugin:'base'
 apply plugin:'application'
-apply plugin: 'groovy'
-apply plugin: 'idea'
+apply plugin:'groovy'
+apply plugin:'idea'
 
 def versions = [
-        jdk     : '1.8'
+        jdk:            '1.8',
+        springBoot:     '1.5.8.RELEASE',
+        swagger:        '2.7.0',
+        h2:             '1.4.196',
+        jsoup:          '1.10.2',
+        gcTranslate:    '1.10.0',
+        groovy:         '2.4.10',
+        spock:          '1.1-groovy-2.4'
+
 ]
 
 sourceCompatibility = versions.jdk
 
-mainClassName = "com.github.kirikakis.marvel.character.Main"
-applicationName = "marvel-character"
+mainClassName = 'com.github.kirikakis.marvel.character.Main'
+applicationName = 'marvel-character'
 
 repositories {
     mavenLocal()
@@ -21,19 +29,18 @@ repositories {
 }
 
 dependencies {
-    compile "org.springframework.boot:spring-boot-starter-web:1.5.8.RELEASE"
-    compile "org.springframework.boot:spring-boot-starter-data-jpa:1.5.8.RELEASE"
-    compile "org.springframework.boot:spring-boot-starter-data-rest:1.5.8.RELEASE"
-    compile "io.springfox:springfox-swagger2:2.7.0"
-    compile "io.springfox:springfox-swagger-ui:2.7.0"
-    compile "org.codehaus.groovy:groovy-all:2.4.10"
-    compile "com.h2database:h2:1.4.196"
-    compile "org.jsoup:jsoup:1.10.2"
-    compile 'com.google.cloud:google-cloud-translate:1.10.0'
+    compile 'org.springframework.boot:spring-boot-starter-web:' + versions.springBoot
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa:' + versions.springBoot
+    compile 'org.springframework.boot:spring-boot-starter-data-rest:' + versions.springBoot
+    compile 'io.springfox:springfox-swagger2:' + versions.swagger
+    compile 'io.springfox:springfox-swagger-ui:' + versions.swagger
+    compile 'com.h2database:h2:' + versions.h2
+    compile 'org.jsoup:jsoup:' + versions.jsoup
+    compile 'com.google.cloud:google-cloud-translate:' + versions.gcTranslate
 
-    testCompile "org.codehaus.groovy:groovy-all:2.4.10"
-    testCompile "org.spockframework:spock-core:1.1-groovy-2.4"
-    testCompile "org.springframework.boot:spring-boot-starter-test:1.5.8.RELEASE"
+    testCompile 'org.codehaus.groovy:groovy-all:' + versions.groovy
+    testCompile 'org.spockframework:spock-core:' + versions.spock
+    testCompile 'org.springframework.boot:spring-boot-starter-test:' + versions.springBoot
 }
 
 tasks.withType(JavaExec) {
